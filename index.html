@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Здоровый образ жизни</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            overflow-x: clip;
+            font-family: 'Roboto', Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        .card-container {
+            pointer-events: none;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 20px;
+            width: 100%;
+            max-width: 400px;
+            transition: all 0.3s ease-in-out;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .card .content {
+            margin-top: 10px;
+        }
+
+        .card .content h3 {
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+            color: #4CAF50;
+        }
+
+        .card.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .card {
+            transform: translateY(20px);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        header {
+            z-index: 100;
+            background-color: #4CAF50;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-top: 10px;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-top: 10px;
+        }
+
+        p {
+            font-size: 1.25rem;
+        }
+
+        #openPopupBtn {
+            display: flex;
+            justify-content: center;
+            border: none;
+            width: 100%;
+            max-width: 400px;
+            border-radius: 10px;
+            cursor: pointer;
+            background-color: #66ee30;
+            font-size: 1.25rem;
+            padding: 15px;
+            margin: 20px auto;
+            transition: all 0.3s;
+        }
+
+        #openPopupBtn:hover {
+            background-color: #4CAF50;
+            color: #fff;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            animation: fadeIn 0.3s;
+        }
+
+        .popup-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 400px;
+            position: relative;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            animation: slideIn 0.3s;
+        }
+
+        .popup-content .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .question {
+            display: none;
+        }
+
+        .question.active {
+            display: block;
+        }
+
+        .radio-group {
+            margin: 10px 0;
+        }
+
+        .radio-input {
+            display: none;
+        }
+
+        .radio-label {
+            display: block;
+            background: #f0f0f0;
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin-bottom: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .radio-input:checked + .radio-label {
+            background: #b3d4fc;
+            color: #fff;
+        }
+
+        .finish-message {
+            display: none;
+            text-align: center;
+        }
+
+        .finish-message.active {
+            display: block;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .button:hover {
+            background-color: #45a049;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-20px); }
+            to { transform: translateY(0); }
+        }
+    </style>
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.0.38/build/spline-viewer.js"></script>
+</head>
+<body>
+    <header>
+        <h4 style="font-weight: normal;">Пройди тест и получи стикеры!</h4>
+        <h1>Здоровый Образ Жизни</h1>
+        <p>Ваш путь к здоровью и благополучию</p>
+    </header>
+
+    <spline-viewer url="https://prod.spline.design/aaOV5UADJW6BUdgn/scene.splinecode"></spline-viewer>
+
+    <div class="card-container">
+        <div class="card">
+            <div class="content">
+                <img src="https://cdn.discordapp.com/attachments/1194269201188261968/1240699054011453531/DALLE_2024-05-16_19.10.41_-_An_illustration_showing_the_negative_effects_of_overeating_and_fast_food._The_image_depicts_unhealthy_food_like_burgers_fries_and_soda_in_a_gloomy_s.webp?ex=66478289&is=66463109&hm=c67e3929a0e410b602baa7066953d45283c4e08309c3de583afabe5399a7ad3a&" alt="Вред переедания">
+                <h3>Вред переедания и фастфуда</h3>
+                <article>
+                    <h4>КАК ИЗБАВИТЬСЯ ОТ ПРИВЫЧКИ ПЕРЕЕДАТЬ ?</h4>
+                    <ol>
+                        <li>Чтобы остановить бесконтрольное поедание пищи, человек должен войти в гармонию с собственным телом, начать, наконец, прислушиваться к его потребностям и научиться различать психологический голод от голода физиологического.</li>
+                        <li>Если вы привыкли перебиваться чем придётся в течение дня, то с высокой долей вероятности вас ждет сытный и обильный ужин со всеми вытекающими из него последствиями — ощущением переполненности желудка, тяжестью в животе и отрыжкой. Частое и дробное питание помогает держать аппетит под контролем, предотвращая переедание.</li>
+                        <li>Иногда мы просто путаем голод с жаждой. Если у вас появилось желание что-то съесть, попробуйте сначала выпить стакан воды или какого-либо другого напитка — морса, компота, несладкого чая. Зачастую этого бывает достаточно, чтобы забыть о голоде и сосредоточиться на другом занятии. Ну а когда придет время обеда или ужина, вы сядете за стол и полноценно поедите.</li>
+                        <li>Забудьте о «жалко выкидывать» и «деньги на еду уже потрачены». Чувствуете насыщение — отлично! Научитесь отказываться от лишней еды.</li>
+                        <li>Не зря придумали пословицу: «Когда я ем, я глух и нем». Одна из причин переедания – переключение внимания на отвлекающие предметы, такие как планшет, телефон и телевизор. Просматривая интересную передачу или листая ленту новостей, вы даже не замечаете, что давно уже утолили свой голод, но продолжаете, есть по инерции. Возьмите за правило делать лишь одно дело, не отвлекаясь ни на что другое. Тогда вы вовремя заметите появление чувства насыщения и встанете из-за стола.</li>
+                    </ol>
+                </article>
+            </div>
+        </div>
+        <div class="card">
+            <img src="https://cdn.discordapp.com/attachments/1194269201188261968/1240699055063957514/DALLE_2024-05-16_19.11.53_-_An_illustration_showing_the_benefits_of_healthy_eating._The_image_depicts_healthy_food_like_fruits_vegetables_and_whole_grains_in_a_bright_and_cheer.webp?ex=66478289&is=66463109&hm=6ed72546cf3d001065ef2909016df91a648440f2a8f8745cb20310e2ac7b53b6&" alt="полезная пища">
+            <div class="content">
+                <h3>Польза здорового питания</h3>
+                <article>
+                    <h4>СЛЕДУЕТ ЛИ ИЗМЕНИТЬ СВОЕ ОТНОШЕНИЕ К ПРИЕМУ ПИЩИ ?</h4>
+                    <ol>
+                        <li>Конечно стоит ! Забудьте о диетах. Имеется ввиду резкое ограничение состава и количества рациона. От таких диет организм получит только стресс, будет работать в энергосберегающем режиме. А при возврате к обычной еде быстро наверстает упущенное.</li>
+                        <li>Разнообразьте рацион. Обязательно включайте свежие фрукты и овощи. Не забывайте о том, что присутствовать должны все группы продуктов.</li>
+                        <li>Соблюдайте режим. Чтобы ускорить метаболизм, есть нужно часто и понемногу. Именно дробное питание – залог нормального веса. Желательно, чтобы приемы пищи были примерно в одно и то же время.</li>
+                        <li>Пейте воду. Для улучшения работы организма и избавления от токсинов нужно пить побольше жидкости – 2 литра ежедневно. Лучше всего подойдет чистая вода (без газа).</li>
+                        <li>Готовьте правильно. Важное значение имеет метод обработки пищи. Лучше продукты варить, готовить на пару или гриле. Жареное сократите до минимума.</li>
+                    </ol>
+                </article>
+            </div>
+        </div>
+        <div class="card">
+            <div class="content">
+                <img src="https://cdn.discordapp.com/attachments/1194269201188261968/1240699054544126053/DALLE_2024-05-16_19.12.31_-_An_illustration_showing_the_negative_effects_of_smoking._The_image_depicts_unhealthy_elements_like_cigarettes_smoke_and_an_ashtray_in_a_dark_and_glo.webp?ex=66478289&is=66463109&hm=53ba324210a2b319f454cb4823b2443512fe726c592e56e7bb66c794ff1964ab&" alt="Вред курения">
+                <h3>Вред курения</h3>
+                <article>
+                    <h4>КАК ИЗБАВИТЬСЯ ОТ ПРИВЫЧКИ КУРИТЬ ?</h4>
+                    <p>Американский национальный институт онкологии создал программу под названием START, тоесть:</p>
+                    <ol>
+                        <li>
+                            <b>S (set)</b> - Выберите точную дату (число, месяц, год) полного отказа от нездоровой привычки. Это мотивирует добиваться желаемого. Если вы пока не готовы с ней определиться, используйте следующие шаги и научитесь сокращать количество выкуриваемых ежедневно сигарет. Когда начнет получаться, вы сможете и сориентироваться в сроках достижения цели.
+                        </li>
+                        <li>
+                            <b>T (tell)</b> - Сообщите своему близкому окружению о принятом решении отказаться от курения. Пусть о вашем желании узнают родные, друзья, коллеги. Попросите их об уместных формах поддержки. Не собирающихся расставаться с табаком убедите не дымить в вашем присутствии и не разбрасывать в поле вашего зрения никотиносодержащей продукции и аксессуаров. Некурящим предложите поддерживать вас морально.
+                        </li>
+                        <li>
+                            <b>A (anticipate)</b> - Если появляется сильное желание курить (вы из увлеченных курильщиков, не выпускающих сигарету изо рта), следует продумать все трудности, ожидающие вас при отказе от любимого удовольствия, и заранее спланировать необходимые действия.
+                        </li>
+                        <li>
+                            <b>R (remove)</b> - Избавьтесь от любой табачной продукции в вашем личном и рабочем пространстве. Когда проходит желание курить, находящиеся в пределах досягаемости табачные изделия и аксессуары — зажигалки, пепельницы, спички — могут спровоцировать срыв.
+                        </li>
+                        <li>
+                            <b>T (talk)</b> - Если самостоятельные усилия не дали результатов и срывы продолжаются, обратитесь к врачу-наркологу. Он не только подберет индивидуальную схему заместительной терапии, включающую в комплексе и терапевтический никотин, и варениклин, являющийся агонистом никотиновых рецепторов, и, вероятно, цитизин (он является природным аналогом никотина). Дозы будут подобраны индивидуально в зависимости от вашего стажа курильщика и проявлений симптомов отмены. Важно то, что комплексное лечение никотиновой зависимости обязательно включает в себя психотерапевтические сеансы — индивидуальные или групповые.
+                        </li>
+                    </ol>
+                </article>
+            </div>
+        </div>
+        <div class="card">
+            <img src="https://cdn.discordapp.com/attachments/1194269201188261968/1240699056536158298/DALLE_2024-05-16_19.12.45_-_An_illustration_showing_the_benefits_of_walking_outdoors._The_image_depicts_a_person_walking_in_a_bright_and_cheerful_park_setting_with_trees_flowers.webp?ex=6647828a&is=6646310a&hm=dd9807e18d5053e266dbfeb89916d869d431d0bc67768e0943c22529673ba1cd&">
+            <div class="content">
+                <h3>Польза прогулок на свежем воздухе</h3>
+                <article>
+                    <h4>КАКОВА ПОЛЬЗА ПРОГУЛОК НА СВЕЖЕМ ВОЗДУХЕ ?</h4>
+                    <ol>
+                        <li>Улучшение кровообращения. Ежедневные прогулки могут положительно влиять на движение крови по сосудам, насыщение тканей кислородом. Благодаря этому можно постепенно восстановить подвижность суставов и активность мышц всего тела.</li>
+                        <li>Здоровый сон и польза для нервной системы. Если у тебя есть определенные трудности с засыпанием, вечерняя прогулка будет отличным решением. Ходьба на свежем воздухе может способствовать расслаблению и снижению беспокойства. Монотонные движения глаз во время прогулок в парке или в сквере позволяют синхронизировать правое и левое полушария головного мозга, снять эмоциональное напряжение.</li>
+                        <li>Замена тренажерному залу. Регулярная ходьба пешком может заменить активные занятия спортом, быть полезной для похудения и поддержания физической формы. Ежедневные прогулки позволяют ускорить сжигание калорий и сделать фигуру более подтянутой без дополнительных упражнений, наполнить тело энергией, сделать сон более крепким. Главное условие: нужно ходить регулярно.</li>
+                        <li>Позитивное настроение. Ходьба может быть полезна не только для физического здоровья, но и для психологического самочувствия. Она может способствовать процессу выработки эндорфинов, которые отвечают за ощущение счастья. Пешие прогулки на свежем воздухе - простой способ поднять настроение и легче справляться со стрессовыми ситуациями.</li>
+                        <li>Укрепление иммунитета. Наш иммунитет - это особая система, которая защищает организм от различных вирусов, бактерий и других угроз. Регулярный стресс и малоподвижный образ жизни могут снижать естественную защиту, повышая риск проблем со здоровьем. Пешие прогулки вне зависимости от погоды могут способствовать более размеренному и глубокому дыханию, поддержанию крепкого иммунитета. Они являются простым способом закаливания организма.</li>
+                    </ol>
+                </article>
+            </div>
+        </div>
+        <div class="card">
+            <img src="https://cdn.discordapp.com/attachments/1194269201188261968/1240699055953412126/DALLE_2024-05-16_19.13.34_-_An_illustration_showing_the_negative_effects_of_a_sedentary_lifestyle._The_image_depicts_unhealthy_elements_like_a_person_sitting_for_long_hours_with_.webp?ex=6647828a&is=6646310a&hm=a8750f369b1bd27baccf41f0fcf44c43f0eae2e365ab4f50c9cd56fdcfae38d8&" alt="Вред сидячего образа жизни">
+            <div class="content">
+                <h3>Вред сидячего образа жизни</h3>
+                <article>
+                    <h4>КАК ИЗБАВИТЬСЯ ОТ СИДЯЧЕГО ОБРАЗА ЖИЗНИ ?</h4>
+                    <ol>
+                        <li>Начните делать зарядку. При сидячем образе жизни физические упражнения особенно необходимы. Тренировки в зале требуют времени и денег, для пробежек нужны хорошие беговые кроссовки и выносливость, а для плавания купальник и шапочка. Но есть более доступный способ зарядиться энергией, улучшить настроение и повысить работоспособность. Речь идет о 20-минутной утренней зарядке. Кроме перечисленных плюсов, она помогает нормализовать кровяное давление, укрепляет иммунитет и ускоряет обмен веществ.</li>
+                        <li>Паркуйтесь подальше от дома. Если времени на зарядку не хватает, организуйте для себя несколько пятиминутных прогулок в течение дня. Например, пройдитесь пешком до метро или попробуйте ездить на работу на велосипеде. Если вы предпочитаете машину, с этого момента начните парковаться в самом дальнем конце стоянки или на соседней улице. Кроме того, пять минут ходьбы до автомобиля или вокруг офиса позволяют насладиться солнцем и свежим воздухом, ощутить смену времен года.</li>
+                        <li>Поставьте напоминание. Сидение в офисном кресле по семь-восемь часов в день — опасное занятие. Из-за этого в организме развиваются застойные явления, спазмируются мышцы и кровеносные сосуды. Кроме того, меняется наша осанка, появляются головная боль и боли в суставах. А иногда наблюдаются дыхательные спазмы. Снизить вред от сидячего образа жизни помогает будильник на компьютере или смартфоне. Установите звонок, чтобы каждый час он напоминал вам о том, что пришло время размять мышцы.</li>
+                        <li>Перестаньте обедать у компьютера. Рабочий стол не предназначен для еды. Если вы берете обед из дома, начните есть на кухне. Если нет — прогуляйтесь до ближайшего кафе, вместо того чтобы снова покупать еду в автомате и налегать на фастфуд. Во-первых, на среднестатистическом офисном столе обитает огромное количество вредных бактерий. Во-вторых, перед компьютером мы съедаем намного больше, чем в кафе или столовой.</li>
+                    </ol>
+                </article>
+            </div>
+        </div>
+        <div class="card">
+            <img src="https://cdn.discordapp.com/attachments/1194269201188261968/1240699056536158298/DALLE_2024-05-16_19.12.45_-_An_illustration_showing_the_benefits_of_walking_outdoors._The_image_depicts_a_person_walking_in_a_bright_and_cheerful_park_setting_with_trees_flowers.webp?ex=6647828a&is=6646310a&hm=dd9807e18d5053e266dbfeb89916d869d431d0bc67768e0943c22529673ba1cd&" alt="Польза утренней зарядки">
+            <div class="content">
+                <h3>Польза утренней зарядки</h3>
+                <article>
+                    <h4>СЕКРЕТЫ ХОРОШЕЙ УТРЕННЕЙ ЗАРЯДКИ</h4>
+                    <ol>
+                        <li>Зарядку лучше делать до завтрака. Она должна быть короткой и приятной. Постарайтесь насытить ее большим количеством упражнений на растяжку.</li>
+                        <li>Выпейте стакан воды перед зарядкой. Помните, что вы не пили как минимум 8 часов во время сна, а какое-то количество воды выделилось с мочой и потом. Кровь стала гуще из-за недостатка жидкости в организме, и усиливать ее циркуляцию – перегружать сердце. Поэтому нужна вода, если голодны – сок. Те, кто жить не может без кофе или чая, могут выпить и эти напитки.</li>
+                        <li>Чем холоднее погода, тем менее активно следует начинать. Если летом зарядку можно делать с пульсом 90-100 ударов в минуту, а к концу тренировки поднять его до 110, то зимой начинайте с 85-90. Так вы не будете шокировать свой организм.</li>
+                        <li>Постепенно увеличивайте нагрузку. После зарядки вы ни в коем случае не должны почувствовать усталость. Этим она отличается от полноценной тренировки. Если такое все-таки произошло укоротите утреннюю разминку. Во время упражнений вы должны чувствовать, как сердце стало биться быстрее и участилось дыхание. После зарядки должно наступить ощущение легкости и бодрости.</li>
+                        <li>Дышите как можно глубже. Это расправит слежавшиеся за ночь легкие и увеличит количество кислорода, поступающего в кровь. В свою очередь, улучшится циркуляция крови, ускорится обмен веществ и увеличится количество сгорающих во время движения жиров.</li>
+                    </ol>
+                </article>
+            </div>
+        </div>
+    </div>
+
+    <button id="openPopupBtn">Пройти тест и забрать стикеры!</button>
+
+    <!-- Попап с тестом -->
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <button class="close-btn" id="closePopupBtn">&times;</button>
+            <div id="questions">
+                <div class="question active">
+                    <p>Какое воздействие оказывает чрезмерное потребление фастфуда?</p>
+                    <div class="radio-group">
+                        <input type="radio" id="answer1-1" name="question1" class="radio-input" data-correct="true">
+                        <label for="answer1-1" class="radio-label">Негативное</label>
+                        <input type="radio" id="answer1-2" name="question1" class="radio-input">
+                        <label for="answer1-2" class="radio-label">Положительное</label>
+                    </div>
+                </div>
+                <div class="question">
+                    <p>Какие преимущества дает регулярная утренняя зарядка?</p>
+                    <div class="radio-group">
+                        <input type="radio" id="answer2-1" name="question2" class="radio-input">
+                        <label for="answer2-1" class="radio-label">Снижение уровня стресса</label>
+                        <input type="radio" id="answer2-2" name="question2" class="radio-input" data-correct="true">
+                        <label for="answer2-2" class="radio-label">Запуск метаболизма</label>
+                    </div>
+                </div>
+                <!-- Дополнительные вопросы -->
+                <div class="question">
+                    <p>Какое последствие влечет за собой курение?</p>
+                    <div class="radio-group">
+                        <input type="radio" id="answer3-1" name="question3" class="radio-input">
+                        <label for="answer3-1" class="radio-label">Улучшение физической формы</label>
+                        <input type="radio" id="answer3-2" name="question3" class="radio-input" data-correct="true">
+                        <label for="answer3-2" class="radio-label">Увеличение риска развития рака</label>
+                    </div>
+                </div>
+                <div class="question">
+                    <p>Чем полезны прогулки на свежем воздухе?</p>
+                    <div class="radio-group">
+                        <input type="radio" id="answer4-1" name="question4" class="radio-input" data-correct="true">
+                        <label for="answer4-1" class="radio-label">Улучшение кровообращения</label>
+                        <input type="radio" id="answer4-2" name="question4" class="radio-input">
+                        <label for="answer4-2" class="radio-label">Повышение стресса</label>
+                    </div>
+                </div>
+            </div>
+            <div class="finish-message" id="finishMessage">
+                <p>Тест завершен!</p>
+                <p id="resultMessage"></p>
+                <a href="https://t.me/addstickers/HLStyle" class="button">Забрать стикеры!</a>
+            </div>
+            <button id="prevBtn" style="display: none;">Назад</button>
+            <button id="nextBtn">Дальше</button>
+        </div>
+    </div>
+  
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const splineContainer = document.querySelector("body > spline-viewer").shadowRoot.querySelector("#container");
+        splineContainer.style.transform = "scale(1.01) translate(-50%, -50%)";
+        splineContainer.style.position = 'fixed';
+        splineContainer.style.top = '50%';
+        splineContainer.style.left = '50%';
+        splineContainer.style.zIndex = '-100';
+
+        const buttonSpline = document.querySelector("body > spline-viewer").shadowRoot.querySelector("#logo");
+        buttonSpline.style.opacity = '0';
+        buttonSpline.style.pointerEvents = 'none';
+
+        const cards = document.querySelectorAll('.card');
+        cards.forEach((card, index) => {
+            setTimeout(() => {
+                card.classList.add('show');
+            }, (index + 1) * 500); // Задержка в миллисекундах, можно настроить по своему усмотрению
+        });
+    });
+
+    const openPopupBtn = document.getElementById('openPopupBtn');
+    const popup = document.getElementById('popup');
+    const closePopupBtn = document.getElementById('closePopupBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const questions = document.querySelectorAll('.question');
+    const finishMessage = document.getElementById('finishMessage');
+    const resultMessage = document.getElementById('resultMessage');
+    let currentQuestionIndex = 0;
+    let correctAnswers = 0;
+
+    openPopupBtn.addEventListener('click', () => {
+        popup.style.display = 'flex';
+    });
+
+    closePopupBtn.addEventListener('click', () => {
+        popup.style.display = 'none';
+    });
+
+    prevBtn.addEventListener('click', () => {
+        if (currentQuestionIndex > 0) {
+            changeQuestion(currentQuestionIndex - 1);
+        }
+    });
+
+    nextBtn.addEventListener('click', () => {
+        const currentQuestion = questions[currentQuestionIndex];
+        const selectedAnswer = currentQuestion.querySelector('.radio-input:checked');
+        if (selectedAnswer && selectedAnswer.hasAttribute('data-correct')) {
+            correctAnswers++;
+        }
+        if (currentQuestionIndex < questions.length - 1) {
+            changeQuestion(currentQuestionIndex + 1);
+        } else {
+            finishTest();
+        }
+    });
+
+    function changeQuestion(index) {
+        questions[currentQuestionIndex].classList.remove('active');
+        questions[index].classList.add('active');
+        currentQuestionIndex = index;
+        prevBtn.style.display = currentQuestionIndex > 0 ? 'inline' : 'none';
+        nextBtn.textContent = currentQuestionIndex === questions.length - 1 ? 'Закончить тест' : 'Дальше';
+    }
+
+    function finishTest() {
+        questions[currentQuestionIndex].classList.remove('active');
+        finishMessage.classList.add('active');
+        const message = correctAnswers / questions.length >= 0.5 ? "Молодец!" : "Я верю, что ты можешь быть лучшей версией себя.";
+        resultMessage.textContent = message;
+        prevBtn.style.display = 'none';
+        nextBtn.style.display = 'none';
+    }
+  </script>
+</body>
+</html>
